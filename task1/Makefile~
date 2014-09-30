@@ -1,11 +1,19 @@
 
-
+OUT_DIR = out
 OUT= ./out/
 JFLAGS = -g -d $(OUT)
 JRFLAGS = -cp ./out/
 JC = javac
 JR = java
 PACKAGE = ru/spbau/voronchikhin/task1/
+MKDIR_P = mkdir -p
+
+.PHONY: directories
+
+directories: ${OUT_DIR}
+
+${OUT_DIR}:
+        ${MKDIR_P} ${OUT_DIR}
 
 .SUFFIXES: .java .class
 .java.class:
@@ -14,7 +22,10 @@ PACKAGE = ru/spbau/voronchikhin/task1/
 CLASSES =\
 	src/$(PACKAGE)Main.java
 
-default: classes
+default: directories classes
+
+outdir: 
+	mkdir -p out
 
 classes: $(CLASSES:.java=.class)
 
@@ -22,5 +33,5 @@ run:
 	$(JR) $(JRFLAGS) $(PACKAGE)Main
 	
 clean:
-	rm -rf $(OUT)/*
+	rm -rf $(OUT)*
 

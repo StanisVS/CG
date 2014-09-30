@@ -4,15 +4,17 @@ JFLAGS = -g -d $(OUT)
 JRFLAGS = -cp ./out/
 JC = javac
 JR = java
-PACKAGE = ru/spbau/voronchikhin/task1/
-
 
 .SUFFIXES: .java .class
 .java.class:
 	 $(JC) $(JFLAGS) $*.java
 
-CLASSES =\
-	src/$(PACKAGE)Main.java
+CLASSES = \
+	src/PointComparator.java \
+	src/Point.java \
+	src/Triangle.java \
+	src/Main.java
+	
 
 default: outdir classes
 
@@ -22,7 +24,7 @@ outdir:
 classes: $(CLASSES:.java=.class)
 
 run:
-	$(JR) $(JRFLAGS) $(PACKAGE)Main
+	$(JR) $(JRFLAGS) Main
 	
 clean:
 	rm -rf $(OUT)*
